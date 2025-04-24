@@ -49,3 +49,13 @@ myLibrary.forEach(book => {
 container.appendChild(table);
 }
 displayLibrary() ;
+ 
+
+
+const dialog = document.querySelector("dialog");
+const newBook = document.getElementById("btn");
+newBook.addEventListener("click", () => {
+  dialog.showModal();
+});
+
+

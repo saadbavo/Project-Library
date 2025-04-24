@@ -10,5 +10,16 @@
 <body>
     <h2 style="text-align: center;">My Library</h2>
     <div id="bookTableContainer"></div>
+    <dialog>
+        <form action="get" id="bookform">
+            <label for="Title">Title :<input type="text"  id="Title"  required></label>
+            <label for="Author">Author :<input type="text" id="Author" required></label>
+            <label for="Pages">Pages : <input type="number" id="Pages"></label>
+            <label for="YearPublished">Year Published : <input type="date" id="YearPublished"></label>
+            <label for="submit"><input type="submit" value="Add Book"> </label>
+            
+        </form>
+    </dialog>
+    <button id="btn">New Book</button>
 </body>
 </html>
