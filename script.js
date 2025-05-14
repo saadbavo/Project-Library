@@ -15,21 +15,25 @@ function addBookToLibrary(title, pages, author, yearPublished) {
   const newBook = new Book(title, pages, author, yearPublished);
   myLibrary.push(newBook);
 }
-addBookToLibrary("To Kill a Mockingbird", 281, "Harper Lee", 1960);
-addBookToLibrary("1984", 328, "George Orwell", 1949);
-addBookToLibrary("The Great Gatsby", 180, "F. Scott Fitzgerald", 1925);
-addBookToLibrary("Pride and Prejudice", 432, "Jane Austen", 1813);
-addBookToLibrary("The Hobbit", 310, "J.R.R. Tolkien", 1937);
 
+function removebook(bookId) {
+  const bookIndex = myLibrary.findIndex(book => book.id === bookId);
+  if (bookIndex !== -1) {
+    myLibrary.splice(bookIndex, 1); // remove the book
+      displayLibrary(); 
+  }
+
+}
 
 function displayLibrary() {
   const container = document.getElementById("bookTableContainer");
+  container.innerHTML = "";
   const table = document.createElement("table");
 
 
 
 const headerRow = document.createElement("tr");
-const headers = ["ID", "Title", "Author", "Pages", "Year Published"]
+const headers = [ "Title", "Author", "Pages", "Year Published"]
 headers.forEach(text =>{
   const th = document.createElement("th");
   th.textContent = text;
@@ -39,23 +43,56 @@ table.appendChild(headerRow)
 
 myLibrary.forEach(book => {
   const row = document.createElement("tr");
-  Object.values(book).forEach(value => {
-    const td = document.createElement("td");
-    td.textContent = value;
-    row.appendChild(td);
-  });
+  const visibleKeys = ["title", "author", "pages", "yearPublished"];
+visibleKeys.forEach(key => {
+  const td = document.createElement("td");
+  td.textContent = book[key];
+  row.appendChild(td);
+});
+
+  const tremoveTd = document.createElement("td");
+  const remove = document.createElement("button");
+  remove.textContent = "Remove"
+  remove.setAttribute("data-id", book.id);
+remove.addEventListener("click", () => removebook(book.id));
+
+
+  tremoveTd.appendChild(remove);
+  
+  row.appendChild(tremoveTd);
+
+
   table.appendChild(row);
 });
 container.appendChild(table);
 }
-displayLibrary() ;
+
  
 
 
 const dialog = document.querySelector("dialog");
 const newBook = document.getElementById("btn");
+
 newBook.addEventListener("click", () => {
   dialog.showModal();
 });
+const submit = document.getElementById("submit");
+submit.addEventListener("click", function(e) {
+  e.preventDefault();
+
+  // Get values from inputs
+  const title = document.getElementById("Title").value;
+  const author = document.getElementById("Author").value;
+  const pages = parseInt(document.getElementById("Pages").value);
+  const yearPublished = parseInt(document.getElementById("YearPublished").value);
+
+  // Add the book to library
+  addBookToLibrary(title, pages, author, yearPublished);
+  dialog.close();
+  displayLibrary() ;
+});
+
+
+
 
 
