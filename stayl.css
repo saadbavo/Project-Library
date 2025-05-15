@@ -72,3 +72,29 @@ dialog {
 #btn:hover {
   background-color: #0096a0;
 }
+
+.remove {
+    background-color: crimson;
+  color: white;
+  border: none;
+ padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.remove:hover{
+   background-color: darkred;
+}
+.toggle-read-btn {
+  background-color: #03DAC6;
+  color: #ffffff;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.toggle-read-btn:hover {
+  background-color: #00b8a9;
+}

@@ -1,11 +1,12 @@
 const myLibrary = [];
 
-function Book(title, pages, author, yearPublished) {
+function Book(title, pages, author, yearPublished, read) {
   this.id = crypto.randomUUID();
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.yearPublished = yearPublished;
+  this.read = read;
   if(!new.target){
     throw Error("you must use 'new'");
   }
@@ -14,6 +15,10 @@ function Book(title, pages, author, yearPublished) {
 function addBookToLibrary(title, pages, author, yearPublished) {
   const newBook = new Book(title, pages, author, yearPublished);
   myLibrary.push(newBook);
+}
+Book.prototype.toggleRead = function() {
+  this.read = !this.read;
+  
 }
 
 function removebook(bookId) {
@@ -50,11 +55,29 @@ visibleKeys.forEach(key => {
   row.appendChild(td);
 });
 
+  const tread = document.createElement("td");
+  const rd = document.createElement("button");
+  rd.textContent = book.read ? "Mark as Unread" : "Mark as Read";
+ rd.classList.add("toggle-read-btn"); 
+  rd.addEventListener("click", ( )=> {
+
+    book.toggleRead();
+    displayLibrary();
+
+  });
+
+  tread.appendChild(rd);
+  row.appendChild(tread);
+
+
   const tremoveTd = document.createElement("td");
   const remove = document.createElement("button");
-  remove.textContent = "Remove"
+  remove.textContent = "Remove";
+  remove.classList.add("remove");
   remove.setAttribute("data-id", book.id);
 remove.addEventListener("click", () => removebook(book.id));
+
+
 
 
   tremoveTd.appendChild(remove);
